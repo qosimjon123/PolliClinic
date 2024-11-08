@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    restart: always
+    ports:
+      - "8888:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SECRET_KEY_APP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
+      MYSQL_DATABASE: '${MYSQLDATABASE}'
+      MYSQL_USER: '${MYSQLUSER}'
+      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
+
+  db:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: '${MYSQLDATABASE}'
+      MYSQL_USER: '${MYSQLUSER}'
+      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQLPASSWORDROOT}'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db:

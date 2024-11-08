@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Админ панель</h1>
+<div>
+    <h3>Создать специализацию</h3>
+    <form method="POST" action="{% url 'create_specialization' %}">  <!-- Исправьте здесь на правильное имя маршрута -->
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="specialization_name">Название специализации</label>
+            <input type="text" class="form-control" id="specialization_name" name="specialization_name" >
+        </div>
+        <div class="mb-3">
+            <label for="specialization_description">Описание</label>
+            <input type="text" class="form-control" id="specialization_description" name="specialization_description" >
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Создать специализацию</button>
+    </form>
+</div>
+
+{% endblock content %}
