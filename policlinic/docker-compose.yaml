@@ -12,7 +12,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      SECRET_KEY_APP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
+      SECRET_KEY_APP: '${SECRETKEYAPP}'
       MYSQL_DATABASE: '${MYSQLDATABASE}'
       MYSQL_USER: '${MYSQLUSER}'
       MYSQL_PASSWORD: '${MYSQLPASSWORD}'

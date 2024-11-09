@@ -21,7 +21,7 @@ class Policy(models.Model):
 
 
 class User(AbstractUser):
-    middle_name = models.CharField(max_length=30, default=None, blank=True,verbose_name="Отчество")
+    middle_name = models.CharField(max_length=30, default=None, null=True, blank=True,verbose_name="Отчество")
     policy = models.OneToOneField(Policy, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Полис")
 
     def __str__(self):
