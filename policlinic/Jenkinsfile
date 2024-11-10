@@ -1,0 +1,67 @@
+pipeline {
+    agent {
+        label "Yuriy"
+    }
+
+    environment {
+        MYSQLDATABASE = credentials('MYSQLDATABASE')
+        MYSQLUSER = credentials('MYSQLUSER')
+        MYSQLPASSWORD = credentials('MYSQLPASSWORD')
+        MYSQLPASSWORDROOT = credentials('MYSQLPASSWORDROOT')
+        SECRETKEYAPP = credentials('SECRETKEYAPP')
+        DOCKERHUB = credentials('DockerHub')
+    }
+
+    stages {
+        stage('Download Resources') {
+            steps {
+                script {
+                    git url: 'https://github.com/qosimjon123/PolliClinic.git', branch: 'feature'
+
+                }
+            }
+        }
+        stage('Stop, Remove Images & Volumes') {
+            steps {
+                script {
+                    sh 'docker-compose -f policlinic/docker-compose.yaml down --rmi all --volumes'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh 'pwd'
+                    sh 'docker-compose -f policlinic/docker-compose.yaml build --no-cache'
+                }
+            }
+        }
+        stage('Push to DockerHub') {
+            steps {
+                script {
+                    sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
+                    sh 'docker tag policlinic_django noname12/policlinic:v2'
+                    sh 'docker push noname12/policlinic:v2'
+                }
+            }
+        }
+        stage('Run the server') {
+            steps {
+                script {
+                    sh 'docker-compose -f policlinic/docker-compose.yaml up -d'
+                }
+            }
+        }
+        stage('Config') {
+            steps {
+                script {
+
+                    sh 'docker exec --tty policlinic_django_1 /bin/bash -c "pipenv run python manage.py migrate"'
+                    sh 'docker exec -it --tty policlinic_django_1 /bin/bash -c "pipenv run python manage.py createsuperuser --username admin --email admin@example.com"'
+
+
+                }
+            }
+        }
+    }
+}
