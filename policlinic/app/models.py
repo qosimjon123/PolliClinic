@@ -21,14 +21,14 @@ class Policy(models.Model):
 
 
 class User(AbstractUser):
-    middle_name = models.CharField(max_length=30, default=None, null=True, blank=True,verbose_name="Отчество")
+    middle_name = models.CharField(max_length=30, default=None, blank=True, null=True, verbose_name="Отчество")
     policy = models.OneToOneField(Policy, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Полис")
 
     def __str__(self):
         if self.middle_name == "":
             return self.first_name + " " + self.last_name + "."
         else:
-            return self.first_name + " " + self.last_name + "." + self.middle_name + "."
+            return str(self.first_name) + " " + str(self.last_name) + "." + str(self.middle_name) + "."
 
     def save(self, *args, **kwargs):
         # Check if the password is set and not already hashed
@@ -148,7 +148,7 @@ class Records(models.Model):
     user = models.ForeignKey(User, on_delete=CASCADE, verbose_name="Пользователь")
     doctor = models.ForeignKey(Doctors, on_delete=models.SET_NULL, null=True, verbose_name="Доктор")
     date_create = models.DateTimeField(auto_now=True, verbose_name="Дата создания")
-    date_record = models.DateField(default=None, verbose_name="День записи")
+    date_record = models.DateField(auto_now_add=True, verbose_name="День записи")
     date_time = models.TimeField(default=None, verbose_name="Время записи")
 
     def __str__(self):

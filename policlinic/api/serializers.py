@@ -6,7 +6,7 @@ from app.models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id' ,'username', 'first_name', 'last_name', 'middle_name', 'email', 'policy', 'password']
+        fields = ['id', 'username', 'first_name', 'last_name', 'middle_name', 'email', 'policy']
         # fields = '__all__'
 
 class UserDoctorSerializer(serializers.ModelSerializer):
@@ -31,16 +31,23 @@ class DoctorSerializer(serializers.ModelSerializer):
         fields = ['user', 'specialization']
 
 
-class RecordSerializer(serializers.ModelSerializer):
-    doctor = serializers.PrimaryKeyRelatedField(queryset=Doctors.objects.all())
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class RecordsGetSerializer(serializers.ModelSerializer):
+    doctor = DoctorSerializer()
+    user = UserSerializer()
 
     class Meta:
         model = Records
         fields = '__all__'
 
+class RecordsPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Records
+        fields = ['name_records', 'date_create', 'date_record', 'date_time', 'doctor']
+
     def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
         return Records.objects.create(**validated_data)
+
 
 class InstitutionSerializer(serializers.ModelSerializer):
     class Meta:

@@ -4,11 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pipfile = "*"
 django = "*"
-djangorestframework = "*"
-mysqlclient = "*"
+mysqlclient = "==2.0.3"
+
 
 [dev-packages]
-
-

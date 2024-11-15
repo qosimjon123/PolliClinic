@@ -4,7 +4,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: Dockerfile.txt
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "8888:8000"
@@ -12,7 +12,7 @@ services:
       db:
         condition: service_healthy
     environment:
-      SECRET_KEY_APP: '${SECRETKEYAPP}'
+      SECRET_KEY_APP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
       MYSQL_DATABASE: '${MYSQLDATABASE}'
       MYSQL_USER: '${MYSQLUSER}'
       MYSQL_PASSWORD: '${MYSQLPASSWORD}'
