@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'api.apps.ApiConfig',
     'tests.apps.TestsConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -85,11 +86,14 @@ WSGI_APPLICATION = 'policlinic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQLDATABASE', ''),  # Измените на переменную окружения
+        'USER': os.environ.get('MYSQLUSER', ''),  # Измените на переменную окружения
+        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),  # Измените на переменную окружения
+        'HOST': 'db',  # Используйте имя сервиса
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
