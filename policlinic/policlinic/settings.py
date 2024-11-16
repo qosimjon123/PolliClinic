@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRETKEYAPP")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'app.User'
 
@@ -83,17 +80,17 @@ WSGI_APPLICATION = 'policlinic.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE', ''),  # Измените на переменную окружения
-        'USER': os.environ.get('MYSQLUSER', ''),  # Измените на переменную окружения
-        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),  # Измените на переменную окружения
-        'HOST': 'db',  # Используйте имя сервиса
+        'NAME': os.environ.get('MYSQLDATABASE', ''),  # Переменная окружения для базы данных MySQL
+        'USER': os.environ.get('MYSQLUSER', ''),  # Переменная окружения для пользователя MySQL
+        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),  # Переменная окружения для пароля MySQL
+        'HOST': 'db',  # Хост MySQL (сервис или IP)
         'PORT': '3306',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

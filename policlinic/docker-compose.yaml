@@ -4,7 +4,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.txt
     restart: always
     ports:
       - "8888:8000"
