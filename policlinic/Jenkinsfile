@@ -16,7 +16,16 @@ pipeline {
         stage('Download Resources') {
             steps {
                 script {
-                    git url: 'https://github.com/qosimjon123/PolliClinic.git', branch: 'feature'
+                    sh 'pwd'
+                    sh 'rm -rf policlinic'
+
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: 'feature']],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[$class: 'SubmoduleOption', recursiveSubmodules: true]],
+                        userRemoteConfigs: [[url: 'https://github.com/qosimjon123/PolliClinic.git']]
+                    ])
 
                 }
             }
@@ -39,9 +48,10 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
-                    sh 'docker tag policlinic_django noname12/policlinic:v2'
-                    sh 'docker push noname12/policlinic:v2'
+                    sh 'pwd'
+                    // sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
+                    // sh 'docker tag policlinic_django noname12/policlinic:v2'
+                    // sh 'docker push noname12/policlinic:v2'
                 }
             }
         }
@@ -55,9 +65,8 @@ pipeline {
         stage('Config') {
             steps {
                 script {
-
-                    sh 'docker exec --tty policlinic_django_1 /bin/bash -c "pipenv run python manage.py migrate"'
-                    sh 'docker exec -it --tty policlinic_django_1 /bin/bash -c "pipenv run python manage.py createsuperuser --username admin --email admin@example.com"'
+                    sh './policlinic/docker_volumes/beckup_mysql.sh root $MYSQLPASSWORDROOT policlinic_db'
+                    sh 'docker exec --tty policlinic_django_1 /bin/bash -c "pipenv run python manage.py test"'
 
 
                 }
