@@ -21,7 +21,7 @@ services:
     image: mysql:latest
     restart: always
     volumes:
-      - db:/var/lib/mysql
+      - ./docker_volumes/mysql:/var/lib/mysql
     ports:
       - "3307:3306"
     environment:

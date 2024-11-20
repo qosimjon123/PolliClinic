@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0002_filepdf_institution_policy_specialization_and_more'),
+        ("app", "0002_filepdf_institution_policy_specialization_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='middle_name',
-            field=models.CharField(default='', max_length=30),
+            model_name="user",
+            name="middle_name",
+            field=models.CharField(default="", max_length=30),
         ),
     ]
