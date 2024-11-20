@@ -25,10 +25,10 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQLDATABASE: '${MYSQLDATABASE}'
-      MYSQLUSER: '${MYSQLUSER}'
-      MYSQLPASSWORD: '${MYSQLPASSWORD}'
-      MYSQLROOTPASSWORD: '${MYSQLPASSWORDROOT}'
+      MYSQL_DATABASE: '${MYSQLDATABASE}'
+      MYSQL_USER: '${MYSQLUSER}'
+      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQLPASSWORDROOT}'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
