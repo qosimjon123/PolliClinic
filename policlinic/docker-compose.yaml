@@ -12,10 +12,10 @@ services:
       db:
         condition: service_healthy
     environment:
-      SECRET_KEY_APP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
-      MYSQL_DATABASE: '${MYSQLDATABASE}'
-      MYSQL_USER: '${MYSQLUSER}'
-      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
+      SECRETKEYAPP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
+      MYSQLDATABASE: '${MYSQLDATABASE}'
+      MYSQLUSER: '${MYSQLUSER}'
+      MYSQLPASSWORD: '${MYSQLPASSWORD}'
 
   db:
     image: mysql:latest
@@ -25,10 +25,10 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_DATABASE: '${MYSQLDATABASE}'
-      MYSQL_USER: '${MYSQLUSER}'
-      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
-      MYSQL_ROOT_PASSWORD: '${MYSQLPASSWORDROOT}'
+      MYSQLDATABASE: '${MYSQLDATABASE}'
+      MYSQLUSER: '${MYSQLUSER}'
+      MYSQLPASSWORD: '${MYSQLPASSWORD}'
+      MYSQLROOTPASSWORD: '${MYSQLPASSWORDROOT}'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
