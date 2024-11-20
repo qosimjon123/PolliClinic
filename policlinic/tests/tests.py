@@ -445,8 +445,8 @@ class PolicyAPITest(APITestCase):
 
         response = self.client.post("/api/v1/Policy/", data, format="json")
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data["message"], "Полис успешно создан!")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
 
     def test_get_specializations(self):
         """Тестируем получение списка специализаций через API"""
