@@ -12,6 +12,8 @@ pipeline {
         DOCKERHUB = credentials('DockerHub')
     }
 
+    
+
     stages {
         stage('Download Resources') {
             steps {
