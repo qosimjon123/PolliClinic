@@ -7,13 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0025_records_date_time'),
+        ("app", "0025_records_date_time"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='filepdf',
-            name='file_path',
-            field=models.FileField(storage=django.core.files.storage.FileSystemStorage(location='/media/PDF'), upload_to='', verbose_name='Путь к файлу'),
+            model_name="filepdf",
+            name="file_path",
+            field=models.FileField(
+                storage=django.core.files.storage.FileSystemStorage(
+                    location="/media/PDF"
+                ),
+                upload_to="",
+                verbose_name="Путь к файлу",
+            ),
         ),
     ]

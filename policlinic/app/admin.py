@@ -12,12 +12,14 @@ admin.site.register(Doctors)
 
 admin.site.register(Policy)
 
+
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'first_name', 'last_name', 'middle_name']
+    list_display = ["username", "first_name", "last_name", "middle_name"]
+
 
 admin.site.register(User, UserAdmin)
 
-#----------
+# ----------
 admin.site.register(Specialization)
 
 

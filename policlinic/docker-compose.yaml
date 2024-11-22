@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   django:
@@ -11,16 +12,16 @@ services:
       db:
         condition: service_healthy
     environment:
-      SECRET_KEY_APP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
-      MYSQL_DATABASE: '${MYSQLDATABASE}'
-      MYSQL_USER: '${MYSQLUSER}'
-      MYSQL_PASSWORD: '${MYSQLPASSWORD}'
+      SECRETKEYAPP: '${SECRETKEYAPP}'  # Замените на настоящий секретный ключ
+      MYSQLDATABASE: '${MYSQLDATABASE}'
+      MYSQLUSER: '${MYSQLUSER}'
+      MYSQLPASSWORD: '${MYSQLPASSWORD}'
 
   db:
     image: mysql:latest
     restart: always
     volumes:
-      - db:/var/lib/mysql
+      - mysql_devops:/var/lib/mysql
     ports:
       - "3307:3306"
     environment:
@@ -35,4 +36,5 @@ services:
       retries: 5
 
 volumes:
-  db:
+  mysql_devops:
+

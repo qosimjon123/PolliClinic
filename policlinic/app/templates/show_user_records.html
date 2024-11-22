@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <h2 class="text-center mt-5">Все записи</h2>
+        <table class="table table-bordered mt-3">
+            <thead class="text-center">
+            <tr>
+                <th>ФИО</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Врач</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Комментарии</th>
+            </tr>
+            {% for record in records %}
+                <tr>
+                    <th>{{ record.first_name }} {{ record.second_name }} {{ record.last_name }}</th>
+                    <th>{{ record.email }}</th>
+                    <th>{{ record.phone }}</th>
+                    <th>{{ record.doctor }}</th>
+                    <th>{{ record.date }}</th>
+                    <th>{{ record.time }}</th>
+                    <th>{{ record.comment }}</th>
+                </tr>
+            {% endfor %}
+            </thead>
+            <tbody id="appointmentsTable">
+                <!-- Здесь будут добавляться записи -->
+            </tbody>
+        </table>
+{% endblock content %}
+
+    first_name = models.CharField(max_length=100)
+    second_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    comment = models.TextField(blank=True, null=True)

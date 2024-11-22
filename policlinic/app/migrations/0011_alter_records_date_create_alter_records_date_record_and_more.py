@@ -8,33 +8,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0010_alter_records_name_records'),
+        ("app", "0010_alter_records_name_records"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='records',
-            name='date_create',
-            field=models.DateTimeField(auto_now=True, verbose_name='Дата создания'),
+            model_name="records",
+            name="date_create",
+            field=models.DateTimeField(auto_now=True, verbose_name="Дата создания"),
         ),
         migrations.AlterField(
-            model_name='records',
-            name='date_record',
-            field=models.DateField(default=None, verbose_name='День записи'),
+            model_name="records",
+            name="date_record",
+            field=models.DateField(default=None, verbose_name="День записи"),
         ),
         migrations.AlterField(
-            model_name='records',
-            name='doctor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.doctors', verbose_name='Доктор'),
+            model_name="records",
+            name="doctor",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="app.doctors",
+                verbose_name="Доктор",
+            ),
         ),
         migrations.AlterField(
-            model_name='records',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            model_name="records",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Пользователь",
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='middle_name',
-            field=models.CharField(blank=True, default=None, max_length=30, verbose_name='Отчество'),
+            model_name="user",
+            name="middle_name",
+            field=models.CharField(
+                blank=True, default=None, max_length=30, verbose_name="Отчество"
+            ),
         ),
     ]

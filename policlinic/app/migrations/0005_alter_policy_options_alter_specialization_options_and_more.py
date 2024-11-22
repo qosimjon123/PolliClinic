@@ -8,66 +8,90 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0004_alter_doctors_options_alter_researchresults_options_and_more'),
+        ("app", "0004_alter_doctors_options_alter_researchresults_options_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='policy',
-            options={'verbose_name': 'Полис', 'verbose_name_plural': 'Полиса'},
+            name="policy",
+            options={"verbose_name": "Полис", "verbose_name_plural": "Полиса"},
         ),
         migrations.AlterModelOptions(
-            name='specialization',
-            options={'verbose_name': 'Название специализации', 'verbose_name_plural': 'Специализации'},
+            name="specialization",
+            options={
+                "verbose_name": "Название специализации",
+                "verbose_name_plural": "Специализации",
+            },
         ),
         migrations.AddField(
-            model_name='records',
-            name='date',
+            model_name="records",
+            name="date",
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AlterField(
-            model_name='doctors',
-            name='specialization',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.specialization', verbose_name='Специализация'),
+            model_name="doctors",
+            name="specialization",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="app.specialization",
+                verbose_name="Специализация",
+            ),
         ),
         migrations.AlterField(
-            model_name='doctors',
-            name='user',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            model_name="doctors",
+            name="user",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Пользователь",
+            ),
         ),
         migrations.AlterField(
-            model_name='policy',
-            name='date_receipt',
-            field=models.DateField(auto_now=True, verbose_name='дата получения'),
+            model_name="policy",
+            name="date_receipt",
+            field=models.DateField(auto_now=True, verbose_name="дата получения"),
         ),
         migrations.AlterField(
-            model_name='policy',
-            name='policy_number',
-            field=models.IntegerField(verbose_name='Полис'),
+            model_name="policy",
+            name="policy_number",
+            field=models.IntegerField(verbose_name="Полис"),
         ),
         migrations.AlterField(
-            model_name='researchresults',
-            name='user',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            model_name="researchresults",
+            name="user",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Пользователь",
+            ),
         ),
         migrations.AlterField(
-            model_name='specialization',
-            name='description',
-            field=models.TextField(verbose_name='Описание'),
+            model_name="specialization",
+            name="description",
+            field=models.TextField(verbose_name="Описание"),
         ),
         migrations.AlterField(
-            model_name='specialization',
-            name='specialization',
-            field=models.CharField(max_length=100, verbose_name='Специализация'),
+            model_name="specialization",
+            name="specialization",
+            field=models.CharField(max_length=100, verbose_name="Специализация"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='middle_name',
-            field=models.CharField(blank=True, default='', max_length=30, verbose_name='Отчество'),
+            model_name="user",
+            name="middle_name",
+            field=models.CharField(
+                blank=True, default="", max_length=30, verbose_name="Отчество"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='policy',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.policy', verbose_name='Полис'),
+            model_name="user",
+            name="policy",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="app.policy",
+                verbose_name="Полис",
+            ),
         ),
     ]

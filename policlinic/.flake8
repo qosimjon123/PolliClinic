@@ -1,0 +1,11 @@
+[flake8]
+
+max-line-length = 500
+exclude =
+    .git,
+    __pycache__,
+    ./policlinic/test,
+
+
+select = E999,F821,F631
+
