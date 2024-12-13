@@ -18,7 +18,7 @@ services:
       MYSQLPASSWORD: '${MYSQLPASSWORD}'
 
   db:
-    image: mysql:latest
+    image: localhost:5000/mysql:V1
     restart: always
     volumes:
       - mysql_devops:/var/lib/mysql
